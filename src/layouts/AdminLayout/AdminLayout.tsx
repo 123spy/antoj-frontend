@@ -11,6 +11,7 @@ import {APP_LOGO, APP_TITLE} from "@/constants/AppConstant";
 import {PageContainer} from "@ant-design/pro-components";
 import {useModel} from "@umijs/max";
 import {useState} from "react";
+import {App} from "antd";
 
 const menuDataRender = (menuList: MenuDataItem[], access: any) => {
   return menuList.filter((menuItem) => {
@@ -59,7 +60,9 @@ const AdminLayout = () => {
           title: null,
           breadcrumb: {},
         }}>
-          <Outlet/>
+          <App>
+            <Outlet/>
+          </App>
         </PageContainer>
       </ProLayout>
     </div>

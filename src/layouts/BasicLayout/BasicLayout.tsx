@@ -46,7 +46,9 @@ const BasicLayout = () => {
             render: () => <GlobalAvatar></GlobalAvatar>
           }}
         >
-          <Outlet/>
+          <App>
+            <Outlet/>
+          </App>
           {/*<PageContainer*/}
           {/*  header={{title: null, breadcrumb: {},}}*/}
           {/*  style={{padding: "0 0px"}}*/}
