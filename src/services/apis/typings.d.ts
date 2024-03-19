@@ -11,6 +11,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseListPostVO_ = {
+    code?: number;
+    data?: PostVO[];
+    message?: string;
+  };
+
   type BaseResponseLong_ = {
     code?: number;
     data?: number;
@@ -65,6 +71,12 @@ declare namespace API {
     message?: string;
   };
 
+  type BaseResponseQuestionAdminVO_ = {
+    code?: number;
+    data?: QuestionAdminVO;
+    message?: string;
+  };
+
   type BaseResponseQuestionSubmitVO_ = {
     code?: number;
     data?: QuestionSubmitVO;
@@ -100,6 +112,11 @@ declare namespace API {
   };
 
   type getPostVOByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type getQuestionAdminVOByIdUsingGETParams = {
     /** id */
     id?: number;
   };
@@ -307,6 +324,20 @@ declare namespace API {
     title?: string;
   };
 
+  type QuestionAdminVO = {
+    acceptedNum?: number;
+    content?: string;
+    createTime?: string;
+    id?: number;
+    judgeCases?: JudgeCase[];
+    judgeConfig?: JudgeConfig;
+    submitNum?: number;
+    tags?: string[];
+    title?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
   type QuestionEditRequest = {
     content?: string;
     id?: number;
@@ -369,6 +400,7 @@ declare namespace API {
     acceptedNum?: number;
     content?: string;
     createTime?: string;
+    hasAccept?: boolean;
     id?: number;
     judgeConfig?: JudgeConfig;
     submitNum?: number;

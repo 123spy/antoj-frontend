@@ -4,17 +4,19 @@ import {history} from "umi";
 import {MenuDataItem} from "@umijs/route-utils";
 import menu from "../../../config/BasicHeaderMenu";
 import {Link, useAccess} from "@@/exports";
-import {BellOutlined, QuestionCircleOutlined} from "@ant-design/icons";
+import {BellOutlined, PlusCircleFilled, QuestionCircleOutlined, SearchOutlined} from "@ant-design/icons";
 import GlobalAvatar from "@/components/GlobalAvatar/GlobalAvatar";
 import {APP_LOGO, APP_TITLE} from "@/constants/AppConstant";
 import {PageContainer} from "@ant-design/pro-components";
-import {App} from "antd";
+import {App, Button, Input, theme} from "antd";
+import {useState} from "react";
 
 const menuDataRender = (menuList: MenuDataItem[], access: any) => {
   return menuList.filter((menuItem) => {
     return !menuItem.access || access[menuItem.access];
   });
 };
+
 
 const BasicLayout = () => {
   const access = useAccess();
@@ -46,7 +48,7 @@ const BasicLayout = () => {
             render: () => <GlobalAvatar></GlobalAvatar>
           }}
         >
-          <App>
+          <App style={{backgroundColor: "rgba(245,243,250, 0.8)", minHeight: "100vh"}}>
             <Outlet/>
           </App>
           {/*<PageContainer*/}

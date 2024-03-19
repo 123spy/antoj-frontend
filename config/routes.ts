@@ -23,7 +23,51 @@
             path: "/question/add",
             name: "题目添加",
             component: '@/pages/Question/QuestionAddPage/QuestionAddPage'
-          }
+          },
+          {
+            path: "/question/edit/:id",
+            name: "题目编辑",
+            component: '@/pages/Question/QuestionEditPage/QuestionEditPage'
+          },
+          {
+            path: "/question/view/:id",
+            name: "题目展示",
+            component: '@/pages/Question/QuestionViewPage/QuestionViewPage'
+          },
+          {
+            path: "/question/history/:id",
+            name: "提交历史",
+            component: '@/pages/Question/QuestionSubmitHistoryPage/QuestionSubmitHistoryPage'
+          },
+          {
+            path: "/question/submit/:id",
+            name: "提交信息",
+            component: '@/pages/Question/QuestionSubmitPage/QuestionSubmitPage'
+          },
+        ]
+      },
+      {
+        path: "/post", name: "帖子", routes: [
+          {
+            path: "/post/content",
+            name: "题目列表",
+            component: '@/pages/Post/PostContentPage/PostContentPage'
+          },
+          {
+            path: "/post/add",
+            name: "题目添加",
+            component: '@/pages/Post/PostAddPage/PostAddPage'
+          },
+          {
+            path: "/post/edit/:id",
+            name: "题目编辑",
+            component: '@/pages/Post/PostEditPage/PostEditPage'
+          },
+          {
+            path: "/post/view/:id",
+            name: "题目展示",
+            component: '@/pages/Post/PostViewPage/PostViewPage'
+          },
         ]
       },
     ]

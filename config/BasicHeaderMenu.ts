@@ -10,8 +10,12 @@ export default [
     name: '题库'
   },
   {
-    path: '/question/add',
-    name: '添加题目'
+    path: '/post/content',
+    name: '讨论'
+  },
+  {
+    path: '/post/add',
+    name: '创作'
   },
   {
     path: "/admin",

@@ -55,6 +55,9 @@ const AdminPostPage = () => {
       // copyable: true,
       ellipsis: true,
       tooltip: '标题过长会自动收缩',
+      render: (_, item) => {
+        return (<Link to={`/post/view/${item?.id}`}>{item?.title}</Link>)
+      }
     },
     {
       title: '标签',
@@ -79,7 +82,7 @@ const AdminPostPage = () => {
       tooltip: '简介过长会自动收缩',
       hideInSearch: true,
       render: (_, item) => {
-        return <Link to={`/user/info/${item?.user?.id}`}>{item?.user?.userName}</Link>
+        return <Link to={`/user/info/${item?.userVO?.id}`}>{item?.userVO?.userName}</Link>
       }
     },
     {

@@ -20,8 +20,9 @@ import {
 import {deletePostUsingPost, listPostVoByPageUsingPost, updatePostUsingPost} from "@/services/apis/postController";
 import {Link} from "@@/exports";
 import {deleteQuestionUsingPost, listQuestionVoByPageUsingPost} from "@/services/apis/questionController";
+import {history} from "@umijs/max";
 
-const AdminPostPage = () => {
+const AdminQuestionPage = () => {
   const actionRef = useRef<ActionType>();
 
   const onDelete = async (id) => {
@@ -79,11 +80,13 @@ const AdminPostPage = () => {
       title: '提交数',
       dataIndex: 'submitNum',
       hideInSearch: true,
+      width: "5%"
     },
     {
       title: '通过数',
       dataIndex: 'acceptedNum',
       hideInSearch: true,
+      width: "5%"
     },
     {
       title: '操作',
@@ -155,47 +158,13 @@ const AdminPostPage = () => {
         pagination={{showSizeChanger: true}}
         dateFormatter="string"
         toolBarRender={() => [
-          <ModalForm
-            trigger={
-              <Button type="primary">
-                <PlusOutlined/>
-                新建
-              </Button>
-            }
-            autoFocusFirstInput
-            modalProps={{
-              destroyOnClose: true,
-            }}
-            submitTimeout={2000}
-            onFinish={async (values) => {
-              const res = await addUserUsingPost(values);
-              if (res?.code === 0) {
-                await actionRef.current.reload();
-                message.success("提交成功");
-              } else {
-                message.error("提交失败")
-              }
-            }}
-            width={800}
-          >
-            <ProFormText
-              name="userName"
-              // disabled
-              label="用户名"
-              placeholder={"请输入用户名称"}
-            />
-            <ProFormText
-              // width="xs"
-              name="userAccount"
-              // disabled
-              label="用户账号"
-              placeholder={"请输入用户账号"}
-            />
-          </ModalForm>
+          <Button type={"primary"} onClick={() => {
+            history.push("/question/add")
+          }}><PlusOutlined/>新建</Button>
         ]}
       />
     </div>
   )
 };
 
-export default AdminPostPage;
+export default AdminQuestionPage;

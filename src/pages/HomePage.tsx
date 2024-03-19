@@ -1,5 +1,10 @@
 import {Tabs} from "antd";
 import {useState} from "react";
+import {Badge, Card, Space} from 'antd';
+import {Link} from "react-router-dom";
+import NewCard from "../components/NewCard/NewCard";
+import RecommendCard from "../components/RecommendCard/RecommendCard";
+import ActivityCard from "../components/ActivityCard/ActivityCard";
 
 const HomePage = () => {
   const [currentKey, setCurrentKey] = useState("new");
@@ -11,17 +16,17 @@ const HomePage = () => {
     {
       key: 'new',
       label: '最新',
-      children: <div>最新</div>,
+      children: <NewCard/>,
     },
     {
       key: 'recommend',
       label: '推荐',
-      children: <div>推荐</div>,
+      children: <RecommendCard/>,
     },
     {
       key: 'activity',
       label: '活动',
-      children: <div>活动</div>,
+      children: <ActivityCard/>,
     },
   ];
 

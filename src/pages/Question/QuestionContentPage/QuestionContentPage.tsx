@@ -4,35 +4,75 @@ import {message} from 'antd';
 import {useRef} from 'react';
 import {listQuestionVoByPageUsingPost} from "@/services/apis/questionController";
 import {Link} from "@@/exports";
+import {CheckCircleOutlined} from "@ant-design/icons";
 
 const QuestionContentPage = () => {
   const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<API.QuestionVO>[] = [
+    // {
+    //   title: "#",
+    //   valueType: "index",
+    //   width: "8%"
+    // },
     {
-      title: '#',
-      valueType: "index",
+      title: "状态",
       width: "8%",
-      align: "center"
-    },
-    {
-      title: '题目',
-      dataIndex: 'title',
       render: (_, item) => {
-        return <Link to={`/question/view/${item?.id}`}>{item?.title}</Link>
-      },
-      width: '80%'
-    },
-    {
-      title: '通过率',
-      align: "center",
-      render: (_, item) => {
-        if (!item?.acceptedNum || !item?.submitNum || item?.acceptedNum == 0 || item?.submitNum == 0) {
-          return 0;
+        if (item?.hasAccept) {
+          return (<div>
+            <CheckCircleOutlined style={{color: "rgb(50,197,121)", fontSize: 16}}/>
+          </div>)
         }
-        return <div>{Math.floor(item?.acceptedNum * 100) / item?.submitNum}</div>;
+        return (<div></div>)
+      }
+    },
+    {
+      title: "题目",
+      render: (_, item, index) => {
+        return (<div><Link to={`/question/view/${item?.id}`}>{index + 1}. {" "}{item?.title}</Link></div>)
+      }
+    },
+    {
+      title: "通过率",
+      width: "8%",
+      render: (_, item) => {
+        if (!item?.acceptedNum === 0 || !item?.submitNum || item?.acceptedNum === 0 || item?.submitNum === 0) {
+          return <div>0 %</div>
+        }
+        return (<div>{(item?.acceptedNum / item?.submitNum * 100).toFixed(2)} %</div>)
       }
     }
+    // {
+    //   title: "通过",
+    //   render: (_, item) => {
+    //     if (!item?.acceptedNum === 0 || !item?.submitNum || item?.acceptedNum === 0 || item?.submitNum === 0) {
+    //       return <div>0 %</div>
+    //     }
+    //     return (<div>{(item?.acceptedNum / item?.submitNum * 100).toFixed(2)} %</div>)
+    //   }
+    // },
+    // {
+    //   title: "状态",
+    //   dataIndex: "hasAccept",
+    //   align: "center",
+    //   width: "8%",
+    //   render: (_, item) => {
+    //     if (item?.hasAccept) {
+    //       return (<div>
+    //         <CheckCircleOutlined style={{color: "rgb(50,197,121)", fontSize: 16}}/>
+    //       </div>)
+    //     }
+    //     return (<div></div>)
+    //   }
+    // },
+    // {
+    //   title: '题目',
+    //   width: "50%",
+    //   render: (_, item) => {
+    //     return <Link to={`/question/view/${item?.id}`}>{item?.title}</Link>
+    //   },
+    // },
   ];
 
   return (
@@ -59,18 +99,10 @@ const QuestionContentPage = () => {
             success: false,
           };
         }}
-        columnsState={{
-          persistenceKey: 'user',
-          persistenceType: 'localStorage',
-          defaultValue: {
-            option: {fixed: 'right', disable: true},
-          },
-        }}
         rowKey="id"
         search={false}
         options={false}
         pagination={{showSizeChanger: true}}
-        dateFormatter="string"
         toolBarRender={() => []}
       />
     </div>

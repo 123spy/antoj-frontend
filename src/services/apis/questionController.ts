@@ -77,6 +77,21 @@ export async function getQuestionVoByIdUsingGet(
   });
 }
 
+/** getQuestionAdminVOById GET /api/question/get/vo/admin */
+export async function getQuestionAdminVoByIdUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getQuestionAdminVOByIdUsingGETParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseQuestionAdminVO_>('/api/question/get/vo/admin', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
 /** listQuestionByPage POST /api/question/list/page */
 export async function listQuestionByPageUsingPost(
   body: API.QuestionQueryRequest,

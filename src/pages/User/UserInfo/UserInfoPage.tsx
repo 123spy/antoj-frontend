@@ -6,21 +6,9 @@ import {history} from "@umijs/max";
 import {PhoneOutlined} from "@ant-design/icons";
 import {useSafeState} from "ahooks";
 import {getUserVoByIdUsingGet} from "@/services/apis/userController";
+import LiveListCard from "../../../components/LiveListCard/LiveListCard";
+import PostListCard from "@/components/PostListCard/PostListCard";
 
-const items = [
-  {
-    key: 'article',
-    label: '文章',
-  },
-  {
-    key: 'application',
-    label: '应用',
-  },
-  {
-    key: 'project',
-    label: '项目',
-  },
-];
 
 const UserInfoPage = () => {
 
@@ -28,7 +16,18 @@ const UserInfoPage = () => {
   const [user, setUser] = useState(null);
   const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
-  const [current, setCurrent] = useSafeState("article");
+  const [current, setCurrent] = useSafeState("post");
+
+  const items = [
+    {
+      key: 'post',
+      label: '文章',
+    },
+    {
+      key: 'live',
+      label: '点赞',
+    }
+  ];
 
   const loadData = async () => {
     const res = await getUserVoByIdUsingGet({id: id});
@@ -92,15 +91,18 @@ const UserInfoPage = () => {
           <Card style={{
             width: "100%",
             height: "500px",
-            boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
+            // boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
           }}
                 tabList={items}
                 activeTabKey={current}
                 onTabChange={onChange}
           >
-            <div style={{paddingTop: 60}}>
-              <Empty description={"暂无数据"}></Empty>
-            </div>
+            {current === "live" && <LiveListCard id={id}/>}
+            {current === "post" && <PostListCard id={id}/>}
+            {/*{current === "live" && <LiveListCard id={id}/>}*/}
+            {/*<div style={{paddingTop: 60}}>*/}
+            {/*  <Empty description={"暂无数据"}></Empty>*/}
+            {/*</div>*/}
           </Card>
         </Col>
       </Row>
