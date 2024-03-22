@@ -27,7 +27,7 @@ type LoginType = 'phone' | 'account';
 export default () => {
   const {token} = theme.useToken();
   const [loginType, setLoginType] = useState<LoginType>('account');
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
 
   const onLogin = async (values) => {
@@ -100,37 +100,6 @@ export default () => {
                 fieldProps={{
                   size: 'large',
                   prefix: <LockOutlined className={'prefixIcon'}/>,
-                  strengthText:
-                    '建议密码应包含数字、字母和特殊字符，长度至少为 8 个字符。',
-                  statusRender: (value) => {
-                    const getStatus = () => {
-                      if (value && value.length > 12) {
-                        return 'ok';
-                      }
-                      if (value && value.length > 6) {
-                        return 'pass';
-                      }
-                      return 'poor';
-                    };
-                    const status = getStatus();
-                    if (status === 'pass') {
-                      return (
-                        <div style={{color: token.colorWarning}}>
-                          强度：中
-                        </div>
-                      );
-                    }
-                    if (status === 'ok') {
-                      return (
-                        <div style={{color: token.colorSuccess}}>
-                          强度：强
-                        </div>
-                      );
-                    }
-                    return (
-                      <div style={{color: token.colorError}}>强度：弱</div>
-                    );
-                  },
                 }}
                 placeholder={'密码: 123456789'}
                 rules={[

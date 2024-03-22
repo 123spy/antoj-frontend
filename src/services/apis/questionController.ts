@@ -137,6 +137,14 @@ export async function listMyQuestionVoByPageUsingPost(
   });
 }
 
+/** getRandomQuestionVO POST /api/question/random */
+export async function getRandomQuestionVoUsingPost(options?: { [key: string]: any }) {
+  return request<API.BaseResponseQuestionVO_>('/api/question/random', {
+    method: 'POST',
+    ...(options || {}),
+  });
+}
+
 /** updateQuestion POST /api/question/update */
 export async function updateQuestionUsingPost(
   body: API.QuestionUpdateRequest,

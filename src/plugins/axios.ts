@@ -3,7 +3,8 @@ import {message} from "antd";
 
 const isDev = process.env.NODE_ENV === 'development';
 
-axios.defaults.baseURL = isDev ? 'http://localhost:8080' : "线上地址";
+// axios.defaults.baseURL = isDev ? 'http://localhost:8080' : "线上地址";
+axios.defaults.baseURL = "http://139.129.50.129:8080"; // 线上地址
 
 axios.defaults.withCredentials = true;
 

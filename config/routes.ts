@@ -3,7 +3,7 @@
     path: "/",
     component: "@/layouts/BasicLayout/BasicLayout",
     routes: [
-      {path: '/', name: '首页', component: '@/pages/HomePage'},
+      {path: '/', name: '首页', component: '@/pages/Home/HomePage'},
       {
         path: "/user",
         name: "用户",

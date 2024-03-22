@@ -13,8 +13,9 @@ import {CodeOutlined, SettingOutlined} from "@ant-design/icons";
 import "./CodeEditor.less";
 import {CODE_DEFAULT_LANGUAGE} from "@/constants/CodeConstant";
 
-const CodeEditor = (props: { value: String, setValue: any, setCodeLanguage: any }) => {
+const CodeEditor = (props: { value: String, setValue: any, language: String, setCodeLanguage: any, id: any }) => {
   // const [value, setValue] = useState();
+  // console.log(props?.id);
   const [language, setLanguage] = useState(CODE_DEFAULT_LANGUAGE);
   // props?.setCodeLanguage(language);
 
@@ -39,6 +40,13 @@ const CodeEditor = (props: { value: String, setValue: any, setCodeLanguage: any 
   function onChange(newValue: String) {
     // console.log("change", newValue);
     setValue(newValue);
+    localStorage.setItem(`${props?.id}::${props?.language}`, newValue);
+  }
+
+  const onCodeLanguageChange = (values) => {
+    setLanguage(values);
+    props?.setCodeLanguage(values);
+    props?.setValue(localStorage.getItem(`${props?.id}::${values}`) ? localStorage.getItem(`${props?.id}::${values}`) : "");
   }
 
   return (
@@ -51,10 +59,7 @@ const CodeEditor = (props: { value: String, setValue: any, setCodeLanguage: any 
             <Select
               value={language}
               style={{width: 140}}
-              onChange={(v) => {
-                setLanguage(v);
-                props?.setCodeLanguage(v);
-              }}
+              onChange={onCodeLanguageChange}
               options={[
                 {value: 'java', label: 'Java'},
                 {value: 'c_cpp', label: 'C++'},
@@ -106,10 +111,7 @@ const CodeEditor = (props: { value: String, setValue: any, setCodeLanguage: any 
               // bordered={false}
               value={language}
               style={{width: 90}}
-              onChange={(v) => {
-                setLanguage(v);
-                props?.setCodeLanguage(v);
-              }}
+              onChange={onCodeLanguageChange}
               options={[
                 {value: 'java', label: 'Java'},
                 {value: 'c_cpp', label: 'C++'},

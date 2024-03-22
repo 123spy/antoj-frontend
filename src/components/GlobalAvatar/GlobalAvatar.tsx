@@ -6,9 +6,9 @@ import {userLogoutUsingPost} from "@/services/apis/userController";
 import {useModel} from "@@/exports";
 
 const GlobalAvatar = () => {
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
-
+  // const currentUser = initialState?.currentUser ? initialState?.currentUser: null;
   const handleMenuClick = async (e) => {
     if (e.key === 'logout') {
       const res = await userLogoutUsingPost();

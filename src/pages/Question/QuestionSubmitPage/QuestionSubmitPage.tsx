@@ -7,7 +7,7 @@ import {doSubmitUsingPost, getQuestionSubmitVoByIdUsingGet} from "@/services/api
 import {FieldTimeOutlined, FileOutlined, TagOutlined} from "@ant-design/icons";
 import MdViewer from "@/components/MdViewer/MdViewer";
 import CodeEditor from "@/components/CodeEditor/CodeEditor";
-import MessageShow from "@/components/MessageShow/MessageShow";
+import SubmitCard from "@/components/SubmitCard/SubmitCard";
 import CodeEditorReadOnly from "@/components/CodeEditorOnly/CodeEditorReadOnly";
 import moment from "moment";
 
@@ -55,8 +55,11 @@ const QuestionSubmitPage = () => {
             <Space split={<Divider type={"vertical"}/>}>
               {questionSubmit?.judgeInfo?.message === "Accepted" && (
                 <div>
-                  <div>执行时间：{questionSubmit?.judgeInfo?.time}</div>
-                  <div>消耗内存：{questionSubmit?.judgeInfo?.memory}</div>
+                  <div>执行时间：{questionSubmit?.judgeInfo?.time} ms</div>
+                  <div>消耗内存：
+                    {Math.round((questionSubmit?.judgeInfo?.memory / 1024 / 1024) * 100) / 100} MB
+                    {/*{questionSubmit?.judgeInfo?.memory}*/}
+                  </div>
                 </div>
               )}
               {questionSubmit?.judgeInfo?.message !== "Accepted" && (<div>

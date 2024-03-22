@@ -16,7 +16,7 @@ const onFinish = async (values: any) => {
 
 const UserUpdateCard = () => {
 
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
 
   if (!currentUser?.id) {

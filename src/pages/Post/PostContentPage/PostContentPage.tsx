@@ -1,18 +1,10 @@
-import type {ActionType, ProColumns} from "@ant-design/pro-components";
-import {ProTable} from "@ant-design/pro-components";
-import {Avatar, Card, Divider, Empty, message, Skeleton, Space} from "antd";
-import {useEffect, useRef, useState} from "react";
-import {listQuestionVoByPageUsingPost} from "@/services/apis/questionController";
-import {history, Link} from "@@/exports";
+import {Card, Divider, Empty, message, Skeleton, Typography} from "antd";
+import {useEffect, useState} from "react";
 import {listPostVoByPageUsingPost} from "@/services/apis/postController";
 import Search from "antd/es/input/Search";
 import {SearchOutlined} from "@ant-design/icons";
-import MdViewer from "../../../components/MdViewer/MdViewer";
-import {Switch, Typography} from "antd";
-import style from "./PostContentPage.less";
-import moment from "../../../plugins/moment";
+import PostCard from "../../../components/PostCard/PostCard";
 
-const {Paragraph, Text} = Typography;
 const PostContentPage = () => {
   const [loading, setLoading] = useState(true);
   const [postList, setPostList] = useState([]);
@@ -54,7 +46,6 @@ const PostContentPage = () => {
             style={{width: "40%"}}
           />
         </div>
-        <div></div>
         <Divider/>
         <div style={{marginTop: 50, padding: "0 10px", minHeight: 300}}>
           <Skeleton loading={loading}>
@@ -64,36 +55,7 @@ const PostContentPage = () => {
               </div>
             )}
             {postList?.map((post, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    history.push(`/post/view/${post?.id}`);
-                  }}
-                  key={post?.id}
-                  style={{cursor: "pointer"}}
-                >
-                  <div style={{width: "100%", maxHeight: 210, overflow: "hidden"}}>
-                    <div>
-                      <Space align={"start"}>
-                        <Avatar size={"large"} src={post?.userVO?.avatarUrl}></Avatar>
-                        <div style={{display: "flex", flexDirection: "column", alignItems: "start"}}>
-                          <div style={{fontSize: 18}}>
-                            <Link to={`/user/info/${post?.userVO?.id}`} style={{color: "black"}}>
-                              {post?.userVO?.userName} |{" "}
-                            </Link>
-                            <span style={{color: "rgb(22,119,255)"}}>{post?.title}</span>
-                          </div>
-                          <div style={{fontSize: 12, color: "black"}}>{moment(post?.createTime).format("L")}</div>
-                        </div>
-                      </Space>
-                    </div>
-                    <div style={{marginTop: 6}}>
-                      <Paragraph ellipsis={{rows: 2}}>{post.content}</Paragraph>
-                    </div>
-                  </div>
-                  <Divider/>
-                </div>
-              );
+              return <PostCard ke={index} post={post}/>;
             })}
           </Skeleton>
         </div>

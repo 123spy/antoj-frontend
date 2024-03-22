@@ -89,6 +89,21 @@ export async function listMyPostVoByPageUsingPost(
   });
 }
 
+/** getRecommendByList POST /api/post/recommend */
+export async function getRecommendByListUsingPost(
+  body: API.PostRecommendRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseListPostVO_>('/api/post/recommend', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** updatePost POST /api/post/update */
 export async function updatePostUsingPost(
   body: API.PostUpdateRequest,

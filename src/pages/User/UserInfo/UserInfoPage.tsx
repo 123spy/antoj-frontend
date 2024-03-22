@@ -14,7 +14,7 @@ const UserInfoPage = () => {
 
   const {id} = useParams();
   const [user, setUser] = useState(null);
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   const [current, setCurrent] = useSafeState("post");
 
@@ -90,7 +90,6 @@ const UserInfoPage = () => {
         <Col span={17} style={{display: "flex", justifyContent: "center"}}>
           <Card style={{
             width: "100%",
-            height: "500px",
             // boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02)",
           }}
                 tabList={items}

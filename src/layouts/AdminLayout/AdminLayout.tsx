@@ -20,7 +20,7 @@ const menuDataRender = (menuList: MenuDataItem[], access: any) => {
 };
 
 const AdminLayout = () => {
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   if (!currentUser || !currentUser?.id || currentUser?.userRole !== 'admin') {
     window.location.href = '/404';

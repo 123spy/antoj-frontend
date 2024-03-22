@@ -17,6 +17,21 @@ export async function doSubmitUsingPost(
   });
 }
 
+/** doDebug POST /api/question_submit/debug */
+export async function doDebugUsingPost(
+  body: API.QuestionDebugRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseLong_>('/api/question_submit/debug', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** getQuestionSubmitVOById GET /api/question_submit/get/vo */
 export async function getQuestionSubmitVoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

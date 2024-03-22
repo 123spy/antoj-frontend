@@ -20,7 +20,7 @@ import {getPostVoByIdUsingGet, updatePostUsingPost} from "@/services/apis/postCo
 const PostEditPage = () => {
   const params = useParams();
   const {id} = params;
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   const [question, setQuestion]: { question: API.QuestionAdminVO, setQuestion: any } = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -85,17 +85,19 @@ const PostEditPage = () => {
             <FormMdEditor/>
           </Form.Item>
 
-          <Form.Item noStyle shouldUpdate>
-            {() => (
-              <Typography>
-                <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
-              </Typography>
-            )}
-          </Form.Item>
+          {
+            currentUser?.userRole === "admin" && (<Form.Item shouldUpdate wrapperCol={{span: 22, offset: 2}}>
+              {() => (
+                <Typography>
+                  <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
+                </Typography>
+              )}
+            </Form.Item>)
+          }
 
-          <Form.Item>
+          <Form.Item wrapperCol={{span: 22, offset: 2}}>
             <Button type="primary" htmlType="submit">
-              更新帖子
+              添加帖子
             </Button>
           </Form.Item>
         </Form>

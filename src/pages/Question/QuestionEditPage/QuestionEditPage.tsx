@@ -14,12 +14,13 @@ import {
   getQuestionAdminVoByIdUsingGet,
   getQuestionVoByIdUsingGet, updateQuestionUsingPost
 } from "@/services/apis/questionController";
+import TextArea from "antd/es/input/TextArea";
 
 
 const QuestionEditPage = () => {
   const params = useParams();
   const {id} = params;
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   const [question, setQuestion]: { question: API.QuestionAdminVO, setQuestion: any } = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -126,7 +127,7 @@ const QuestionEditPage = () => {
                           name={[name, 'input']}
                           label={"输入用例"}
                         >
-                          <Input.TextArea rows={1} placeholder="输入用例"/>
+                          <TextArea autoSize={{minRows: 3}} placeholder="输入用例"/>
                         </Form.Item>
                         <Form.Item
                           style={{flex: 1}}
@@ -134,7 +135,7 @@ const QuestionEditPage = () => {
                           label={"输出用例"}
                           name={[name, 'output']}
                         >
-                          <Input.TextArea rows={1} placeholder="输出用例"/>
+                          <TextArea autoSize={{minRows: 3}} placeholder="输出用例"/>
                         </Form.Item>
                         {/*<MinusCircleOutlined onClick={() => remove(name)}/>*/}
                       </div>
@@ -150,17 +151,19 @@ const QuestionEditPage = () => {
             </Form.List>
           </Form.Item>
 
-          <Form.Item noStyle shouldUpdate>
-            {() => (
-              <Typography>
-                <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
-              </Typography>
-            )}
-          </Form.Item>
+          {
+            currentUser?.userRole === "admin" && (<Form.Item shouldUpdate label={""} wrapperCol={{span: 22, offset: 2}}>
+              {() => (
+                <Typography>
+                  <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
+                </Typography>
+              )}
+            </Form.Item>)
+          }
 
-          <Form.Item>
+          <Form.Item label={""} labelCol={{span: 2}} wrapperCol={{span: 22, offset: 2}}>
             <Button type="primary" htmlType="submit">
-              更新题目
+              添加题目
             </Button>
           </Form.Item>
         </Form>

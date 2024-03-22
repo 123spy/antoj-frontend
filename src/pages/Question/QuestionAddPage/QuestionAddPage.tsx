@@ -13,7 +13,7 @@ import {addQuestionUsingPost} from "@/services/apis/questionController";
 
 
 const QuestionAddPage = () => {
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   if (!currentUser || !currentUser?.id || currentUser?.userRole !== 'admin') {
     window.location.href = '/404';
@@ -119,15 +119,18 @@ const QuestionAddPage = () => {
           </Form.List>
         </Form.Item>
 
-        <Form.Item noStyle shouldUpdate>
-          {() => (
-            <Typography>
-              <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
-            </Typography>
-          )}
-        </Form.Item>
+        {/*<Form.Item noStyle shouldUpdate label={"判题用例"}>*/}
+        {
+          currentUser?.userRole === "admin" && (<Form.Item shouldUpdate label={""} wrapperCol={{span: 22, offset: 2}}>
+            {() => (
+              <Typography>
+                <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>
+              </Typography>
+            )}
+          </Form.Item>)
+        }
 
-        <Form.Item>
+        <Form.Item label={""} labelCol={{span: 2}} wrapperCol={{span: 22, offset: 2}}>
           <Button type="primary" htmlType="submit">
             添加题目
           </Button>

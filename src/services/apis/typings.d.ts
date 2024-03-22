@@ -277,6 +277,11 @@ declare namespace API {
     userId?: number;
   };
 
+  type PostRecommendRequest = {
+    num?: number;
+    postId?: number;
+  };
+
   type PostThumbAddRequest = {
     postId?: number;
   };
@@ -336,6 +341,13 @@ declare namespace API {
     title?: string;
     updateTime?: string;
     userId?: number;
+  };
+
+  type QuestionDebugRequest = {
+    code?: string;
+    judgeCase?: JudgeCase;
+    language?: string;
+    questionId?: number;
   };
 
   type QuestionEditRequest = {

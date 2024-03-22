@@ -14,7 +14,7 @@ import {
 } from "@ant-design/icons";
 import {CODE_DEFAULT_LANGUAGE} from "@/constants/CodeConstant";
 import {doSubmitUsingPost, listQuestionSubmitByPageUsingPost} from "@/services/apis/questionSubmitController";
-import MessageShow from "@/components/MessageShow/MessageShow";
+import SubmitCard from "@/components/SubmitCard/SubmitCard";
 import {Typography} from 'antd';
 import {addUserUsingPost, listUserByPageUsingPost, updateUserUsingPost} from "@/services/apis/userController";
 import {
@@ -29,7 +29,7 @@ import {
 import moment from "@/plugins/moment";
 
 const QuestionSubmitHistoryPage = () => {
-  const {initialState, loading, refresh, setInitialState} = useModel('@@initialState');
+  const {initialState, setInitialState} = useModel('@@initialState');
   const {currentUser} = initialState;
   const params = useParams();
   const {id} = params;

@@ -4,16 +4,16 @@
 import {getLoginUserUsingGet} from "@/services/apis/userController";
 
 export async function getInitialState(): Promise<{
-  currentUser?: any;
+  currentUser?: API.UserVO;
 }> {
   // 请求用户信息
   const res: any = await getLoginUserUsingGet();
   if (res?.code === 0) {
     return {
-      currentUser: res?.data
+      currentUser: res?.data ? res?.data : {}
     }
   }
   return {
-    currentUser: null
+    currentUser: {}
   };
 }

@@ -10,6 +10,8 @@ import {APP_LOGO, APP_TITLE} from "@/constants/AppConstant";
 import {PageContainer} from "@ant-design/pro-components";
 import {App, Button, Input, theme} from "antd";
 import {useState} from "react";
+import "./BasicLayout.less";
+import GlobalFooter from "@/components/GlobalFooter/GlobalFooter";
 
 const menuDataRender = (menuList: MenuDataItem[], access: any) => {
   return menuList.filter((menuItem) => {
@@ -34,7 +36,9 @@ const BasicLayout = () => {
           style={{padding: 0}}
           fixedHeader={true}
           pageTitleRender={false}
-          footerRender={() => <div></div>}
+          footerRender={() => {
+            return <GlobalFooter/>
+          }}
           menuDataRender={() => menuDataRender(menu, access)}
           menuItemRender={(
             menuItemProps, defaultDom
@@ -48,7 +52,7 @@ const BasicLayout = () => {
             render: () => <GlobalAvatar></GlobalAvatar>
           }}
         >
-          <App style={{backgroundColor: "rgba(245,243,250, 0.8)", minHeight: "100vh"}}>
+          <App className={"BasicLayout-Content"}>
             <Outlet/>
           </App>
           {/*<PageContainer*/}

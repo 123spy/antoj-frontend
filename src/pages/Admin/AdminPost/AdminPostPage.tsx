@@ -195,7 +195,7 @@ const AdminPostPage = () => {
         dateFormatter="string"
         toolBarRender={() => [
           <Button type={"primary"} onClick={() => {
-            history.push("/post/edit")
+            history.push("/post/add")
           }}><PlusOutlined/>新建</Button>
         ]}
       />
